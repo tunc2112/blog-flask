@@ -1,0 +1,14 @@
+{% extends "core.html" %}
+
+{% block container %}
+{{ description }}
+
+<div style="display: flex; flex-wrap: wrap;">
+{% for tag, tag_count in tags %}
+	<div style="flex: 0 0 20%;">
+		<a class="btn btn-secondary btn-sm" href="/tags/{{ tag }}" role="button">{{ tag }}</a>
+		<span>x {{ tag_count }}</span>
+	</div>
+{% endfor %}
+</div>
+{% endblock container %}

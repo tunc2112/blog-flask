@@ -1,0 +1,7 @@
+{% extends "core.html" %}
+
+{% block container %}
+<h1>{{ post.title }}</h1>
+<small>{{ post.date }}</small>
+{{ post.html|safe }}
+{% endblock container %}
