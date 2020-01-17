@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>{{ title }}</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
 		<link rel="icon" href="{{ url_for('static', filename='image/favicon.ico') }}" type="image/x-icon">
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/core.css') }}">
 		{% block head_extension %}
 		{% endblock %}
 	</head>
@@ -31,15 +33,22 @@
 						<a class="nav-link" href="/projects">Projects</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link disabled" href="/resume">Resume</a>
-					</li>
-					<li class="nav-item">
 						<a class="nav-link" href="/about">About</a>
 					</li>
 				</ul>
 			</div>
 		</nav>
-		{% block container %}
-		{% endblock container %}
+		<div class="container">
+			{% block container %}
+			{% endblock container %}
+		</div>
+		<footer class="footer">
+			<div class="container">
+				<p>Make with <i class="fa fa-heart"></i> by @tunc2112.</p>
+				<div>
+					<a href="https://github.com/tunc2112"><i class="fa fa-github fa-3x"></i></a>
+				</div>
+			</div>
+		</footer>
 	</body>
 </html>

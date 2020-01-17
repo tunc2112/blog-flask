@@ -3,7 +3,6 @@ from flask_flatpages import *
 # from flask_frozen import Freezer
 # from flaskext.markdown import Markdown
 import sys
-import os
 
 DEBUG = True
 FLATPAGES_AUTO_RELOAD = DEBUG
@@ -21,12 +20,14 @@ flatpages.init_app(app)
 
 @app.route("/")
 def welcome():
-	return render_template("index.html")
+	posts = [p for p in flatpages if p.path.startswith("")]
+	posts.sort(key=lambda item: (not item["pinned"], item["date"]))
+	return render_template("index.html", posts=posts)
 
 
 @app.errorhandler(404)
 def page_not_found(e):
-	print(e)
+	# print(e)
 	return render_template("404.html"), 404
 
 
@@ -50,7 +51,7 @@ def show_tags():
 		for tag in p["tags"]:
 			tags[tag] = tags.get(tag, 0) + 1
 
-	return render_template("tags.html", description="All tags", tags=sorted(tags.items()))
+	return render_template("tags.html", tags=sorted(tags.items()))
 
 
 @app.route("/tags/<tagname>")
@@ -58,6 +59,17 @@ def show_posts_with_tags(tagname):
 	posts = [p for p in flatpages if tagname in p["tags"]]
 	posts.sort(key=lambda item: (not item["pinned"], item["date"]))
 	return render_template("posts.html", description="All posts with tag #" + tagname, posts=posts)
+
+
+@app.route("/projects")
+def show_projects():
+	projects = [{"name": "blog-flask", "description": "Blog written in Flask"}]
+	return render_template("projects.html", description="All projects", projects=projects)
+
+
+@app.route("/about")
+def about():
+	return render_template("about.html")
 
 
 if __name__ == "__main__":

@@ -1,21 +1,29 @@
 {% extends "core.html" %}
 
+{% set title = "All posts - tunc2112" %}
+
+{% macro create_posts_list(posts) %}
+	<ul class="list-group">
+	{% for post in posts %}
+		<li class="list-group-item" style="line-height: 2rem;">
+			<span style="font-size: 1.5rem;">
+				<a href="/posts/{{ post.path }}">{{ post.title }}</a>
+				{% if post.pinned is sameas true %}
+					<span class="badge badge-primary"><i class="fa fa-thumb-tack"></i></span>
+				{% endif %}
+			</span>
+			<small>{{ post.date }}</small>
+		    <br>
+			{% for tag in post.tags %}
+				<a class="btn btn-secondary btn-sm" href="/tags/{{ tag }}" role="button">{{ tag }}</a>
+			{% endfor %}
+		</li>
+	{% endfor %}
+	</ul>
+{% endmacro %}
+
 {% block container %}
 {{ description }}
 
-<ul class="list-group">
-{% for post in posts %}
-	<li class="list-group-item">
-	<a href="/posts/{{ post.path }}">{{ post.title }}</a>
-	{% if post.pinned is sameas true %}
-		<span class="badge badge-primary"><i class="fa fa-thumb-tack"></i></span>
-	{% endif %}
-	<small>{{ post.date }}</small>
-    <br>
-	{% for tag in post.tags %}
-		<a class="btn btn-secondary btn-sm" href="/tags/{{ tag }}" role="button">{{ tag }}</a>
-	{% endfor %}
-	</li>
-{% endfor %}
-</ul>
+{{ create_posts_list(posts) }}
 {% endblock container %}

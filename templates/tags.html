@@ -1,14 +1,16 @@
 {% extends "core.html" %}
 
-{% block container %}
-{{ description }}
+{% set title = "Tags - tunc2112" %}
 
-<div style="display: flex; flex-wrap: wrap;">
-{% for tag, tag_count in tags %}
-	<div style="flex: 0 0 20%;">
-		<a class="btn btn-secondary btn-sm" href="/tags/{{ tag }}" role="button">{{ tag }}</a>
-		<span>x {{ tag_count }}</span>
+{% block container %}
+	<h3>All tags</h3>
+
+	<div style="display: flex; flex-wrap: wrap;">
+	{% for tag, tag_count in tags %}
+		<div style="flex: 0 0 20%;">
+			<a class="btn btn-secondary btn-sm" href="/tags/{{ tag }}" role="button">{{ tag }}</a>
+			<span>x {{ tag_count }}</span>
+		</div>
+	{% endfor %}
 	</div>
-{% endfor %}
-</div>
 {% endblock container %}

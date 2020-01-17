@@ -1,7 +1,9 @@
 {% extends "core.html" %}
 
+{% set title = post.title + " - tunc2112" %}
+
 {% block container %}
-<h1>{{ post.title }}</h1>
-<small>{{ post.date }}</small>
-{{ post.html|safe }}
+	<h1>{{ post.title }}</h1>
+	<small>{{ post.date }}</small>
+	{{ post.html|safe }}
 {% endblock container %}

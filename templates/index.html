@@ -1,5 +1,10 @@
 {% extends "core.html" %}
 
+{% set title = "Home page - tunc2112" %}
+
 {% block container %}
-<h1>Hello!</h1>
+	<h1>Hello!</h1>
+
+	{% from 'posts.html' import create_posts_list %}
+	{{ create_posts_list(posts) }}
 {% endblock container %}
