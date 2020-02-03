@@ -20,5 +20,6 @@ tags: ["test", "tag1"]
 
 int main() {
     std::cout << "Hello\n";
+    return 0;
 }
 ```

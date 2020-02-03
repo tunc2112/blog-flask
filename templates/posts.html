@@ -1,16 +1,16 @@
 {% extends "core.html" %}
 
-{% set title = "All posts - tunc2112" %}
+{% set title = "All posts" %}
 
 {% macro create_posts_list(posts) %}
 	<ul class="list-group">
 	{% for post in posts %}
 		<li class="list-group-item" style="line-height: 2rem;">
 			<span style="font-size: 1.5rem;">
-				<a href="/posts/{{ post.path }}">{{ post.title }}</a>
 				{% if post.pinned is sameas true %}
 					<span class="badge badge-primary"><i class="fa fa-thumb-tack"></i></span>
 				{% endif %}
+				<a href="/posts/{{ post.path }}">{{ post.title }}</a>
 			</span>
 			<small>{{ post.date }}</small>
 		    <br>

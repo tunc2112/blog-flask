@@ -1,6 +1,10 @@
 {% extends "core.html" %}
 
-{% set title = post.title + " - tunc2112" %}
+{% set title = post.title %}
+{% block head_extension %}
+	<link rel="stylesheet" href="{{ url_for('pygments_css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/codehilite.css') }}">
+{% endblock %}
 
 {% block container %}
 	<h1>{{ post.title }}</h1>

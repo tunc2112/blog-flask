@@ -2,13 +2,16 @@ from flask import *
 from flask_flatpages import *
 # from flask_frozen import Freezer
 # from flaskext.markdown import Markdown
+from pygments.formatters import HtmlFormatter
 import sys
+
+from custommonokai import CustomMonokaiStyle
 
 DEBUG = True
 FLATPAGES_AUTO_RELOAD = DEBUG
 FLATPAGES_EXTENSION = ".md"
 FLATPAGES_ROOT = "posts"
-FLATPAGES_MARKDOWN_EXTENSIONS = ["codehilite"]
+FLATPAGES_MARKDOWN_EXTENSIONS = ["codehilite", "fenced_code"]
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -16,6 +19,12 @@ flatpages = FlatPages(app)
 flatpages.init_app(app)
 # Markdown(app)
 # freezer = Freezer(app)
+
+
+@app.route('/pygments.css')
+def pygments_css():
+	style = HtmlFormatter(style=CustomMonokaiStyle).style
+	return pygments_style_defs(style), 200, {'Content-Type': 'text/css'}
 
 
 @app.route("/")
