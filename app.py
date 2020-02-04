@@ -40,17 +40,17 @@ def page_not_found(e):
 	return render_template("404.html"), 404
 
 
+@app.route("/posts/<postname>")
+def show_post(postname):
+	post = flatpages.get_or_404(postname)
+	return render_template("post.html", post=post)
+
+
 @app.route("/posts")
 def show_posts():
 	posts = list(flatpages)  # [p for p in flatpages if p.path.startswith("")]
 	posts.sort(key=lambda item: (not item["pinned"], item["date"]))
 	return render_template("posts.html", posts=posts)
-
-
-@app.route("/posts/<postname>")
-def show_post(postname):
-	post = flatpages.get_or_404(postname)
-	return render_template("post.html", post=post)
 
 
 @app.route("/categories")
@@ -107,7 +107,9 @@ def search():
 		query = request.args.get("s")
 		results = []
 		for post in list(flatpages):
-			if post["category"] == query or query in post["tags"] or post["title"].find(query) != -1:
+			# TODO: Elastic search
+			if post["category"].find(query) != -1 or any(tag.find(query) != -1 for tag in post["tags"])\
+				or post["title"].find(query) != -1:
 				results.append(post)
 
 		results.sort(key=lambda item: (not item["pinned"], item["date"]))

@@ -11,19 +11,28 @@
 
 {% set title = description %}
 
+{% macro create_post_subtitle(post, is_new_page_redirecting) %}
+<div class="subtitle">
+	<i class="fa fa-calendar"></i>
+	<span> {{ post.date }}</span>
+	<i class="fas fa-comment-alt"></i>
+	{% set next_url = ("/posts/" + post.path) if is_new_page_redirecting is sameas true else "" %}
+	<span><a href="{{ next_url }}#disqus_thread" class="comment_href"></a></span>
+</div>
+{% endmacro %}
+
 {% macro create_posts_list(posts, filter_category=None, filter_tag=None) %}
 	<ul class="list-group">
 	{% for post in posts %}
 		{% if (not filter_category or filter_category == post.category) and (not filter_tag or filter_tag in post.tags) %}
-			<li class="list-group-item" style="line-height: 2rem;">
+			<li class="list-group-item post_info">
 				<span style="font-size: 1.5rem;">
 					{% if post.pinned is sameas true %}
 						<span class="badge badge-primary"><i class="fa fa-thumb-tack"></i></span>
 					{% endif %}
 					<a href="/posts/{{ post.path }}" style="color: black;">{{ post.title }}</a>
 				</span>
-				<small style="color: #888;">{{ post.date }}</small>
-			    <br>
+				{{ create_post_subtitle(post, true) }}
 				<a class="btn btn-success tag_badge" href="/categories/{{ post.category }}" role="button">
 					<i class="fa fa-code-fork"></i> {{ post.category }}
 				</a>

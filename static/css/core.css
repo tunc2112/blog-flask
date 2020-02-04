@@ -28,3 +28,21 @@ body > .container {
     flex-direction: row;
     justify-content: space-between;
 }
+
+.post_info {
+    /* line-height: 2rem; */
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    margin: 0.3rem 0;
+}
+
+.subtitle > span {
+    margin-right: 0.4rem;
+    color: #555;
+}
+
+.comment_href {
+    color: inherit;
+}
