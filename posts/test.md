@@ -1,6 +1,7 @@
 title: test post
 date: 2020-01-20
 pinned: False
+category: "test"
 tags: ["test", "tag1"]
 
 # Heading 1

@@ -9,5 +9,10 @@
 {% block container %}
 	<h1>{{ post.title }}</h1>
 	<small>{{ post.date }}</small>
+	<br>
+	{% for tag in post.tags %}
+		<a class="btn btn-secondary tag_badge" href="/tags/{{ tag }}" role="button">{{ tag }}</a>
+	{% endfor %}
+	<hr>
 	{{ post.html|safe }}
 {% endblock container %}

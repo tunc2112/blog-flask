@@ -16,3 +16,9 @@ body > .container {
     color: #ccc;
     padding: 10px;
 }
+
+.tag_badge {
+    padding: 0.1rem 0.4rem;
+    font-size: 0.9rem;
+    border-radius: 0.2rem;
+}

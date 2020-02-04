@@ -5,7 +5,7 @@ from flask_flatpages import *
 from pygments.formatters import HtmlFormatter
 import sys
 
-from custommonokai import CustomMonokaiStyle
+from style import CustomMonokaiStyle
 
 DEBUG = True
 FLATPAGES_AUTO_RELOAD = DEBUG
@@ -42,15 +42,32 @@ def page_not_found(e):
 
 @app.route("/posts")
 def show_posts():
-	posts = [p for p in flatpages if p.path.startswith("")]
+	posts = list(flatpages)  # [p for p in flatpages if p.path.startswith("")]
 	posts.sort(key=lambda item: (not item["pinned"], item["date"]))
-	return render_template("posts.html", description="", posts=posts)
+	return render_template("posts.html", posts=posts)
 
 
 @app.route("/posts/<postname>")
 def show_post(postname):
 	post = flatpages.get_or_404(postname)
 	return render_template("post.html", post=post)
+
+
+@app.route("/categories")
+def show_categories():
+	categories = {}
+	for p in flatpages:
+		category = p["category"]
+		categories[category] = categories.get(category, 0) + 1
+
+	return render_template("categories.html", categories=sorted(categories.items()))
+
+
+@app.route("/categories/<name>")
+def show_posts_with_category(name):
+	posts = list(flatpages)  # [p for p in flatpages if p.path.startswith("")]
+	posts.sort(key=lambda item: (not item["pinned"], item["date"]))
+	return render_template("posts.html", posts=posts, filter_category=name)
 
 
 @app.route("/tags")
@@ -63,11 +80,11 @@ def show_tags():
 	return render_template("tags.html", tags=sorted(tags.items()))
 
 
-@app.route("/tags/<tagname>")
-def show_posts_with_tags(tagname):
-	posts = [p for p in flatpages if tagname in p["tags"]]
+@app.route("/tags/<name>")
+def show_posts_with_tag(name):
+	posts = list(flatpages)  # [p for p in flatpages if p.path.startswith("")]
 	posts.sort(key=lambda item: (not item["pinned"], item["date"]))
-	return render_template("posts.html", description="All posts with tag #" + tagname, posts=posts)
+	return render_template("posts.html", posts=posts, filter_tag=name)
 
 
 @app.route("/projects")

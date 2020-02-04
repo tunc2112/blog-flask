@@ -1,6 +1,7 @@
 title: test pinned post
 date: 2020-01-20
 pinned: True
+category: "test"
 tags: ["test", "tag2"]
 
 # Heading 1
@@ -14,6 +15,8 @@ tags: ["test", "tag2"]
 ##### Heading 5
 
 ###### Heading 6
+
+Some codes are `here`.
 
 ```cpp
 #include <iostream>
