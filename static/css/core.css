@@ -22,3 +22,9 @@ body > .container {
     font-size: 0.9rem;
     border-radius: 0.2rem;
 }
+
+#navbarNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

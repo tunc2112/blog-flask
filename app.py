@@ -28,7 +28,7 @@ def pygments_css():
 
 
 @app.route("/")
-def welcome():
+def home():
 	posts = [p for p in flatpages if p.path.startswith("")]
 	posts.sort(key=lambda item: (not item["pinned"], item["date"]))
 	return render_template("index.html", posts=posts)
@@ -96,6 +96,22 @@ def show_projects():
 @app.route("/about")
 def about():
 	return render_template("about.html")
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+	# from forms import SearchForm
+	# search_form = SearchForm()
+
+	if request.method == "GET":
+		query = request.args.get("s")
+		results = []
+		for post in list(flatpages):
+			if post["category"] == query or query in post["tags"] or post["title"].find(query) != -1:
+				results.append(post)
+
+		results.sort(key=lambda item: (not item["pinned"], item["date"]))
+		return render_template("results.html", query=query, results=results)
 
 
 if __name__ == "__main__":
