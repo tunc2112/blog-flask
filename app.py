@@ -11,7 +11,7 @@ DEBUG = True
 FLATPAGES_AUTO_RELOAD = DEBUG
 FLATPAGES_EXTENSION = ".md"
 FLATPAGES_ROOT = "posts"
-FLATPAGES_MARKDOWN_EXTENSIONS = ["codehilite", "fenced_code"]
+FLATPAGES_MARKDOWN_EXTENSIONS = ["codehilite", "fenced_code", "tables"]
 
 app = Flask(__name__)
 app.config.from_object(__name__)

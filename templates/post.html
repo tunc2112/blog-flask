@@ -4,6 +4,10 @@
 {% block head_extension %}
 	<link rel="stylesheet" href="{{ url_for('pygments_css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/codehilite.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/post.css') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/toc.js') }}"></script>
+	<script type="text/javascript" id="MathJax-script" async
+	        src="https://cdn.jsdelivr.net/npm/mathjax@3.0.0/es5/tex-mml-chtml.js"></script>
 {% endblock %}
 
 {% block container %}
@@ -18,11 +22,18 @@
 			<a class="btn btn-secondary tag_badge" href="/tags/{{ tag }}" role="button">{{ tag }}</a>
 		{% endfor %}
 	</div>
-	<hr>
-	{{ post.html|safe }}
-
-	{% block disqus_comment %}
-		<div id="comment">
+	<div id="post_body" class="row">
+		<div id="post_left_side" class="col-sm-9">
+			<hr>
+			{{ post.html|safe }}
+		</div>
+		<div id="post_right_side" class="col-sm-3">
+			<div id="toc"></div>
+			<script>create_toc();</script>
+		</div>
+	</div>
+	<div>
+		<div id="comment" class="col-sm-9">
 			<div id="disqus_thread"></div>
 		</div>
 		<script>
@@ -31,8 +42,8 @@
 		*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
 		*/
 		var disqus_config = function () {
-			this.page.url = "https://tunc2112.me/" + {{ post.path }};  // Replace PAGE_URL with your page's canonical URL variable
-			this.page.identifier = {{ post.path }}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+			this.page.url = "https://tunc2112.me/{{ post.path }}";  // Replace PAGE_URL with your page's canonical URL variable
+			this.page.identifier = "{{ post.path }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 		};
 
 		(function() { // DON'T EDIT BELOW THIS LINE
@@ -43,5 +54,5 @@
 		})();
 		</script>
 		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-	{% endblock disqus_comment %}
+	</div>
 {% endblock container %}

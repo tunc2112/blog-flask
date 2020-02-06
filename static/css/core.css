@@ -6,7 +6,7 @@ body {
 
 body > .container {
     flex: 1 0 auto;
-    margin: 15px auto;
+    margin: 70px auto 15px;
 }
 
 .footer {
@@ -27,10 +27,6 @@ body > .container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-
-.post_info {
-    /* line-height: 2rem; */
 }
 
 .subtitle {

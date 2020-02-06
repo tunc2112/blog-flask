@@ -1,0 +1,14 @@
+blockquote {
+    border-left: #00aaff 5px solid;
+    padding-left: 10px;
+    background: #eaeaea
+}
+
+thead, tbody, th, tr, td {
+    border: #ccc 1px solid;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 0.75rem;
+}
