@@ -79,9 +79,11 @@ Markdown | Less | Pretty
 
 ###### Latex
 
-- $$x + y = z$$
+- $$x^n + y^n = z^n$$
 
 - $$\int_{0}^{\infty} f(t)dt=F_X(x)$$
+
+- Inline \\(E[X] = \int_{0}^{\infty}xf(x)dx\\)
 
 ###### This a very long heading
 
