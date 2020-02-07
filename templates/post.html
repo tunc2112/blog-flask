@@ -16,25 +16,17 @@
 		<h1 style="margin-bottom: 0;">{{ post.title }}</h1>
 		{% from 'posts.html' import create_post_subtitle %}
 		{{ create_post_subtitle(post, false) }}
-		<a class="btn btn-success tag_badge" href="/categories/{{ post.category }}" role="button">
-			<i class="fa fa-code-fork"></i> {{ post.category }}
-		</a>
-		{% for tag in post.tags %}
-			<a class="btn btn-secondary tag_badge" href="/tags/{{ tag }}" role="button">{{ tag }}</a>
-		{% endfor %}
 	</div>
-	<div id="post_body" class="row">
-		<div id="post_left_side" class="col-sm-9">
+	<div class="post_body">
+		<div id="post_left_side" class="left_side">
 			<hr>
 			{{ post.html|safe }}
 		</div>
-		<div id="post_right_side" class="col-sm-3">
+		<div id="post_right_side" class="right_side">
 			<div id="toc"></div>
 			<script>create_toc();</script>
 		</div>
-	</div>
-	<div>
-		<div id="comment" class="col-sm-9">
+		<div id="comment" class="left_side">
 			<div id="disqus_thread"></div>
 		</div>
 		<script>embed_disqus();</script>
