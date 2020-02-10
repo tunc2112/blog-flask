@@ -4,7 +4,7 @@ function create_toc() {
     var all_headings = post_content.querySelectorAll("h1,h2,h3,h4,h5,h6");
     for (var heading of all_headings) {
         var link_str = heading.textContent.toLowerCase().split(" ").join("-");
-        console.log(heading, link_str);
+        // console.log(heading, link_str);
         heading.setAttribute("id", link_str);
 
         var anchor_element = document.createElement("A");

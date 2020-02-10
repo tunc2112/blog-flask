@@ -8,6 +8,11 @@ blockquote > :last-child {
 	margin-bottom: 0;
 }
 
+#post_left_side > blockquote {
+    /* outer blockquote */
+    padding-right: 1rem;
+}
+
 thead {
 	background: #ececec
 }

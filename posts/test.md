@@ -1,4 +1,4 @@
-title: test post
+title: test post 😂
 date: 2020-01-20
 pinned: False
 category: "test"
