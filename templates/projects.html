@@ -1,6 +1,9 @@
 {% extends "core.html" %}
 
 {% set title = "Projects" %}
+{% block head_extension %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/listing.css') }}">
+{% endblock %}
 
 {% block container %}
 	<h3>All projects</h3>

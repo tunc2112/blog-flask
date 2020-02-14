@@ -6,6 +6,9 @@
 #}
 
 {% set title = metadata_type.capitalize() %}
+{% block head_extension %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/listing.css') }}">
+{% endblock %}
 
 {% block container %}
 	<h3>All {{ metadata_type }}</h3>
