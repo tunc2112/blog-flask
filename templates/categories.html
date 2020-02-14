@@ -8,7 +8,7 @@
 	<div style="display: flex; flex-wrap: wrap;">
 	{% for name, posts_count in categories %}
 		<div style="flex: 0 0 20%;">
-			<a class="btn btn-secondary tag_badge" href="/categories/{{ name }}" role="button">{{ name }}</a>
+			<a class="btn btn-success tag_badge" href="/categories/{{ name }}" role="button">{{ name }}</a>
 			<span>x {{ posts_count }}</span>
 		</div>
 	{% endfor %}

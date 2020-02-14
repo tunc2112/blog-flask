@@ -100,6 +100,17 @@ Markdown | Less | Pretty
 
 ###### This a very long heading
 
+<details><summary>Magic</summary>
+<p>
+yes, even hidden code blocks!
+
+```python
+print("hello world!")
+```
+
+</p>
+</details>
+
 Some codes are `here`.
 
 ```cpp

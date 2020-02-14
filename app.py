@@ -89,7 +89,7 @@ def show_posts_with_tag(name):
 
 @app.route("/projects")
 def show_projects():
-	projects = [{"name": "blog-flask", "description": "Blog written in Flask"}]
+	from projects import projects
 	return render_template("projects.html", description="All projects", projects=projects)
 
 
