@@ -2,7 +2,7 @@ title: test pinned post
 date: 2020-01-20
 pinned: True
 category: "test"
-tags: ["test", "tag2"]
+tags: ["test", "tag2", "pinned", "markdown", "latex"]
 
 # Heading 1
 

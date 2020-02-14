@@ -8,8 +8,30 @@
     }
 }
 
+.subtitle {
+    font-size: 0.9rem;
+    margin: 0.3rem 0;
+}
+
+.subtitle > span {
+    margin-right: 0.4rem;
+    color: #555;
+}
+
+.comment_href {
+    color: inherit;
+}
+
 .post_info {
     /* line-height: 2rem; */
+}
+
+.post_heading {
+    font-size: 2.5rem;
+}
+
+._h1 {
+    font-weight: 500;
 }
 
 .post_body {

@@ -20,28 +20,38 @@ body > .container {
     padding: 10px;
 }
 
-.tag_badge {
-    padding: 0.1rem 0.4rem;
-    font-size: 0.9rem;
-    border-radius: 0.2rem;
-}
-
 #navbarNav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.subtitle {
+.search_btn {
+    margin-left: 10px;
+}
+
+.tag_badge {
+    padding: 0.1rem 0.4rem;
     font-size: 0.9rem;
-    margin: 0.3rem 0;
+    border-radius: 0.2rem;
 }
 
-.subtitle > span {
-    margin-right: 0.4rem;
-    color: #555;
+.pinned_badge {
+    font-size: 1.125rem;
 }
 
-.comment_href {
-    color: inherit;
+.listing_div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.badge_listing_col {
+    /* flex: 0 0 20%; */
+    width: 20%;
+    margin-bottom: 10px;
+}
+
+.project_card {
+    width: 18rem;
+    margin: 1%;
 }

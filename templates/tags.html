@@ -5,9 +5,9 @@
 {% block container %}
 	<h3>All tags</h3>
 
-	<div style="display: flex; flex-wrap: wrap;">
+	<div class="listing_div">
 	{% for name, posts_count in tags %}
-		<div style="flex: 0 0 20%;">
+		<div class="badge_listing_col">
 			<a class="btn btn-secondary tag_badge" href="/tags/{{ name }}" role="button">{{ name }}</a>
 			<span>x {{ posts_count }}</span>
 		</div>
