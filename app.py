@@ -60,7 +60,7 @@ def show_categories():
 		category = p["category"]
 		categories[category] = categories.get(category, 0) + 1
 
-	return render_template("categories.html", categories=sorted(categories.items()))
+	return render_template("listing.html", metadata_type="categories", metadata_listing=sorted(categories.items()))
 
 
 @app.route("/categories/<name>")
@@ -77,7 +77,7 @@ def show_tags():
 		for tag in p["tags"]:
 			tags[tag] = tags.get(tag, 0) + 1
 
-	return render_template("tags.html", tags=sorted(tags.items()))
+	return render_template("listing.html", metadata_type="tags", metadata_listing=sorted(tags.items()))
 
 
 @app.route("/tags/<name>")
