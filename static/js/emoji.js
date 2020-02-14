@@ -1,8 +1,3 @@
-/**
- emoji_unicode.json data from
- https://github.com/jollygoodcode/twemoji/blob/760af1fc6ce51f452595052630e6a1a666a0ec33/lib/twemoji/data/emoji-unicode.yml
-*/
-
 function convert_emoji() {
     let body = document.body;
     let s = body.innerHTML;

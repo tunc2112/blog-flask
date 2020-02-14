@@ -30,6 +30,20 @@ body > .container {
     margin-left: 10px;
 }
 
+.subtitle {
+    font-size: 0.9rem;
+    margin: 0.3rem 0;
+}
+
+.subtitle > span {
+    margin-right: 0.4rem;
+    color: #555;
+}
+
+.comment_href {
+    color: inherit;
+}
+
 .tag_badge {
     padding: 0.1rem 0.4rem;
     font-size: 0.9rem;
