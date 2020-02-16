@@ -5,8 +5,7 @@
 	<link rel="stylesheet" href="{{ url_for('pygments_css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/codehilite.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/post.css') }}">
-	<script type="text/javascript" src="{{ url_for('static', filename='js/toc.js') }}"></script>
-	<script type="text/javascript" src="{{ url_for('static', filename='js/disqus.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/post.js') }}"></script>
 	<script type="text/javascript" id="MathJax-script" async
 	        src="https://cdn.jsdelivr.net/npm/mathjax@3.0.0/es5/tex-mml-chtml.js"></script>
 {% endblock %}
@@ -29,12 +28,14 @@
 		</div>
 		<div id="post_right_side" class="right_side">
 			<div id="toc"></div>
-			<script>create_toc();</script>
 		</div>
 		<div id="comment" class="left_side">
 			<div id="disqus_thread"></div>
 		</div>
-		<script>embed_disqus();</script>
+		<script>
+			create_toc();
+			embed_disqus();
+		</script>
 		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 	</div>
 {% endblock container %}

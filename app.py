@@ -5,20 +5,21 @@ from flask_flatpages import *
 from pygments.formatters import HtmlFormatter
 import sys
 
+from config import *
 from style import CustomMonokaiStyle
 
-DEBUG = True
-FLATPAGES_AUTO_RELOAD = DEBUG
-FLATPAGES_EXTENSION = ".md"
-FLATPAGES_ROOT = "posts"
-FLATPAGES_MARKDOWN_EXTENSIONS = ["codehilite", "fenced_code", "tables"]
-
 app = Flask(__name__)
-app.config.from_object(__name__)
+app.config.from_object('config.SiteConfiguration')
+app.route = prefix_route(app.route, SiteConfiguration.BASEURL)
 flatpages = FlatPages(app)
 flatpages.init_app(app)
 # Markdown(app)
 # freezer = Freezer(app)
+
+
+@app.context_processor
+def set_global_variable():
+	return dict(site=SiteConfiguration.get_site_variables())
 
 
 @app.route('/pygments.css')
@@ -28,7 +29,7 @@ def pygments_css():
 
 
 @app.route("/")
-def home():
+def index():
 	posts = [p for p in flatpages if p.path.startswith("")]
 	posts.sort(key=lambda item: (not item["pinned"], item["date"]))
 	return render_template("index.html", posts=posts)
@@ -47,14 +48,14 @@ def show_post(postname):
 
 
 @app.route("/posts")
-def show_posts():
+def posts():
 	posts = list(flatpages)  # [p for p in flatpages if p.path.startswith("")]
 	posts.sort(key=lambda item: (not item["pinned"], item["date"]))
 	return render_template("posts.html", posts=posts)
 
 
 @app.route("/categories")
-def show_categories():
+def categories():
 	categories = {}
 	for p in flatpages:
 		category = p["category"]
@@ -71,7 +72,7 @@ def show_posts_with_category(name):
 
 
 @app.route("/tags")
-def show_tags():
+def tags():
 	tags = {}
 	for p in flatpages:
 		for tag in p["tags"]:
@@ -88,7 +89,7 @@ def show_posts_with_tag(name):
 
 
 @app.route("/projects")
-def show_projects():
+def projects():
 	from projects import projects
 	return render_template("projects.html", description="All projects", projects=projects)
 

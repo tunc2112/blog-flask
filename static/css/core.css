@@ -53,3 +53,8 @@ body > .container {
 .pinned_badge {
     font-size: 1.125rem;
 }
+
+.listing_post_title {
+    font-size: 1.5rem;
+    color: black;
+}

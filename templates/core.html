@@ -2,17 +2,16 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>{{ title }} - tunc2112</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+		<title>{{ title }} - {{ site.title }}</title>
 		<link rel="icon" href="{{ url_for('static', filename='image/favicon.ico') }}" type="image/x-icon">
+		<script id="dsq-count-scr" src="//tunc2112.disqus.com/count.js" async></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
 		<script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
-		<link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
-		<script id="dsq-count-scr" src="//tunc2112.disqus.com/count.js" async></script>
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/core.css') }}">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/markdown.css') }}">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/emoji.css') }}">
@@ -23,7 +22,7 @@
 	</head>
 	<body>
 		<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
-			<a class="navbar-brand" href="/"><i class="fa fa-code"></i> tunc2112</a>
+			<a class="navbar-brand" href="{{ url_for('index') }}"><i class="fa fa-code"></i> {{ site.title }}</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 			</button>
@@ -33,19 +32,19 @@
 						<a class="nav-link" href="/">Home</a>
 					</li> -->
 					<li class="nav-item">
-						<a class="nav-link" href="/posts">Posts</a>
+						<a class="nav-link" href="{{ url_for('posts') }}">Posts</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/categories">Categories</a>
+						<a class="nav-link" href="{{ url_for('categories') }}">Categories</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/tags">Tags</a>
+						<a class="nav-link" href="{{ url_for('tags') }}">Tags</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/projects">Projects</a>
+						<a class="nav-link" href="{{ url_for('projects') }}">Projects</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/about">About</a>
+						<a class="nav-link" href="{{ url_for('about') }}">About</a>
 					</li>
 				</ul>
 				<form class="form-inline" action="{{ url_for('search') }}">
