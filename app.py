@@ -10,7 +10,7 @@ from style import CustomMonokaiStyle
 
 app = Flask(__name__)
 app.config.from_object('config.SiteConfiguration')
-app.route = prefix_route(app.route, SiteConfiguration.BASEURL)
+app.route = prefix_route(app.route, SiteConfiguration.get_baseurl())
 flatpages = FlatPages(app)
 flatpages.init_app(app)
 # Markdown(app)
@@ -19,7 +19,9 @@ flatpages.init_app(app)
 
 @app.context_processor
 def set_global_variable():
-	return dict(site=SiteConfiguration.get_site_variables())
+	r = {"site_" + k: v for k, v in SiteConfiguration.get_site_variables().items()}
+	# print(SiteConfiguration.get_site_variables(), r)
+	return r
 
 
 @app.route('/pygments.css')
