@@ -19,9 +19,9 @@ flatpages.init_app(app)
 
 @app.context_processor
 def set_global_variable():
-	r = {"site_" + k: v for k, v in SiteConfiguration.get_site_variables().items()}
+	r = {"site_" + k: v for k, v in SiteConfiguration.site_variables.items()}
 	# print(SiteConfiguration.get_site_variables(), r)
-	return r
+	return dict(**r, site=SiteConfiguration.site_variables)
 
 
 @app.route('/pygments.css')

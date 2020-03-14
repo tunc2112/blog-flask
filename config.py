@@ -20,16 +20,12 @@ class SiteConfiguration:
 	FLATPAGES_ROOT = "posts"
 	FLATPAGES_MARKDOWN_EXTENSIONS = ["codehilite", "fenced_code", "tables"]
 
-	__config_yml = load_from_yaml("_config.yml")
+	site_variables = load_from_yaml("_config.yml")
 	# BASEURL = __config_yml.get("baseurl", "/")
 
 	@staticmethod
-	def get_site_variables():
-		return SiteConfiguration.__config_yml
-
-	@staticmethod
 	def get_baseurl():
-		return SiteConfiguration.__config_yml.get("baseurl", "/")
+		return SiteConfiguration.site_variables.get("baseurl", "/")
 
 
 def prefix_route(route_function, prefix='', mask='{0}{1}'):
