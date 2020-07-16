@@ -4,6 +4,7 @@ from flask_flatpages import *
 # from flaskext.markdown import Markdown
 from pygments.formatters import HtmlFormatter
 import sys
+from werkzeug.exceptions import HTTPException
 
 from config import *
 from style import CustomMonokaiStyle
@@ -32,15 +33,15 @@ def pygments_css():
 
 @app.route("/")
 def index():
-	posts = [p for p in flatpages if p.path.startswith("")]
-	posts.sort(key=lambda item: (not item["pinned"], item["date"]))
-	return render_template("index.html", posts=posts)
+	_posts = [p for p in flatpages if p.path.startswith("")]
+	_posts.sort(key=lambda item: (not item["pinned"], item["date"]))
+	return render_template("index.html", posts=_posts)
 
 
-@app.errorhandler(404)
-def page_not_found(e):
-	# print(e)
-	return render_template("404.html"), 404
+@app.errorhandler(Exception)
+def handle_exception(e):
+	if isinstance(e, HTTPException):
+		return render_template("404.html"), e.code
 
 
 @app.route("/posts/<postname>")
@@ -51,43 +52,43 @@ def show_post(postname):
 
 @app.route("/posts")
 def posts():
-	posts = list(flatpages)  # [p for p in flatpages if p.path.startswith("")]
-	posts.sort(key=lambda item: (not item["pinned"], item["date"]))
-	return render_template("posts.html", posts=posts)
+	_posts = list(flatpages)  # [p for p in flatpages if p.path.startswith("")]
+	_posts.sort(key=lambda item: (not item["pinned"], item["date"]))
+	return render_template("posts.html", posts=_posts)
 
 
 @app.route("/categories")
 def categories():
-	categories = {}
+	_categories = {}
 	for p in flatpages:
 		category = p["category"]
-		categories[category] = categories.get(category, 0) + 1
+		_categories[category] = _categories.get(category, 0) + 1
 
-	return render_template("listing.html", metadata_type="categories", metadata_listing=sorted(categories.items()))
+	return render_template("listing.html", metadata_type="categories", metadata_listing=sorted(_categories.items()))
 
 
 @app.route("/categories/<name>")
 def show_posts_with_category(name):
-	posts = list(flatpages)  # [p for p in flatpages if p.path.startswith("")]
-	posts.sort(key=lambda item: (not item["pinned"], item["date"]))
-	return render_template("posts.html", posts=posts, filter_category=name)
+	_posts = list(flatpages)  # [p for p in flatpages if p.path.startswith("")]
+	_posts.sort(key=lambda item: (not item["pinned"], item["date"]))
+	return render_template("posts.html", posts=_posts, filter_category=name)
 
 
 @app.route("/tags")
 def tags():
-	tags = {}
+	_tags = {}
 	for p in flatpages:
 		for tag in p["tags"]:
-			tags[tag] = tags.get(tag, 0) + 1
+			_tags[tag] = _tags.get(tag, 0) + 1
 
-	return render_template("listing.html", metadata_type="tags", metadata_listing=sorted(tags.items()))
+	return render_template("listing.html", metadata_type="tags", metadata_listing=sorted(_tags.items()))
 
 
 @app.route("/tags/<name>")
 def show_posts_with_tag(name):
-	posts = list(flatpages)  # [p for p in flatpages if p.path.startswith("")]
-	posts.sort(key=lambda item: (not item["pinned"], item["date"]))
-	return render_template("posts.html", posts=posts, filter_tag=name)
+	_posts = list(flatpages)  # [p for p in flatpages if p.path.startswith("")]
+	_posts.sort(key=lambda item: (not item["pinned"], item["date"]))
+	return render_template("posts.html", posts=_posts, filter_tag=name)
 
 
 @app.route("/projects")
