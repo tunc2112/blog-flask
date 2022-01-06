@@ -15,9 +15,11 @@ class SiteObject(object):
 
 class SiteConfiguration:
 	DEBUG = True
-	FLATPAGES_AUTO_RELOAD = DEBUG
+	FLATPAGES_AUTO_RELOAD = True
 	FLATPAGES_EXTENSION = ".md"
 	FLATPAGES_ROOT = "posts"
+	FLATPAGES_BLOG_ROOT = "posts"
+	FLATPAGES_LEARNING_ROOT = "posts"
 	FLATPAGES_MARKDOWN_EXTENSIONS = ["codehilite", "fenced_code", "tables"]
 
 	site_variables = load_from_yaml("_config.yml")
@@ -26,6 +28,14 @@ class SiteConfiguration:
 	@staticmethod
 	def get_baseurl():
 		return SiteConfiguration.site_variables.get("baseurl", "/")
+
+	@staticmethod
+	def get_blog_baseurl():
+		return SiteConfiguration.site_variables.get("blog_baseurl", "/blog")
+
+	@staticmethod
+	def get_learning_baseurl():
+		return SiteConfiguration.site_variables.get("learning_baseurl", "/learning")
 
 
 def prefix_route(route_function, prefix='', mask='{0}{1}'):

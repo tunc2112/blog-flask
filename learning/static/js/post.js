@@ -28,7 +28,7 @@ function embed_disqus() {
 	*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
 	*/
 	var disqus_config = function () {
-		this.page.url = "https://tunc2112.me/{{ url_for('posts') }}/{{ post.path }}";  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.url = "https://tunc2112.me/{{ url_for('.learning_posts') }}/{{ post.path }}";  // Replace PAGE_URL with your page's canonical URL variable
 		this.page.identifier = "{{ post.path }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 	};
 
