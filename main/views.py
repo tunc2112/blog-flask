@@ -14,13 +14,13 @@ flatpages.init_app(app)
 app.config["FLATPAGES_ROOT"] = os.path.join(app.root_path, "posts")
 flatpages.reload()
 
-from blog.blog import blog_bp
-from learning.learning import learning_bp
+from blog import blog_bp
+from learning import learning_bp
 
-app.register_blueprint(blog_bp, url_prefix="/blog")
-app.register_blueprint(learning_bp, url_prefix="/learning")
+app.register_blueprint(blog_bp)
+app.register_blueprint(learning_bp)
 
-# app.logger.debug("url_map = %s", app.url_map)
+app.logger.debug("url_map = %s", app.url_map)
 app.logger.debug("prefix = %s", app.root_path)
 app.logger.debug("flatpages_root = %s", app.config["FLATPAGES_ROOT"])
 app.logger.debug("flatpages = %s", [p.path for p in flatpages])

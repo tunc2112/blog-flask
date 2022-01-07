@@ -1,4 +1,4 @@
-{% extends "core.html" %}
+{% extends "learning/core.html" %}
 
 {% set title = "Home page" %}
 
@@ -6,6 +6,6 @@
 	<h1>Hello!</h1>
 	<h2>Recent posts</h2>
 
-	{% from 'posts.html' import create_posts_list %}
+	{% from 'learning/posts.html' import create_posts_list %}
 	{{ create_posts_list(posts) }}
 {% endblock container %}

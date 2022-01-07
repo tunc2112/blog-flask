@@ -1,4 +1,4 @@
-{% extends "core.html" %}
+{% extends "blog/core.html" %}
 
 {% set title = post.title %}
 {% block head_extension %}
@@ -18,7 +18,7 @@
 				<span class="badge badge-primary pinned_badge" style="vertical-align: middle;"><i class="fa fa-thumb-tack"></i></span>
 			{% endif %}
 		</div>
-		{% from 'posts.html' import create_post_subtitle %}
+		{% from 'blog/posts.html' import create_post_subtitle %}
 		{{ create_post_subtitle(post, false) }}
 	</div>
 	<div class="post_body">
@@ -30,6 +30,7 @@
 			<div id="toc"></div>
 		</div>
 		<div id="comment" class="left_side">
+			<hr>
 			<div id="disqus_thread"></div>
 		</div>
 		<script>

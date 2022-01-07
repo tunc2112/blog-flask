@@ -1,4 +1,4 @@
-{% extends "core.html" %}
+{% extends "blog/core.html" %}
 
 {% set description = "All posts" %}
 {% if filter_category %}
@@ -14,12 +14,12 @@
 	<link rel="stylesheet" href="{{ url_for('.static', filename='css/post.css') }}">
 {% endblock %}
 
-{% macro create_post_subtitle(post, is_new_page_redirecting) %}
+{% macro create_post_subtitle(post, prefix, is_new_page_redirecting) %}
 <div class="subtitle">
 	<i class="fa fa-calendar"></i>
 	<span> {{ post.date }}</span>
 	<i class="fas fa-comment-alt"></i>
-	{% set next_url = (url_for('.posts') + "/" + post.path) if is_new_page_redirecting is sameas true else "" %}
+	{% set next_url = (url_for('.posts') + "/" + post.path[prefix|length:]) if is_new_page_redirecting is sameas true else "" %}
 	<span><a href="{{ next_url }}#disqus_thread" class="comment_href"></a></span>
 </div>
 <div>
@@ -33,18 +33,19 @@
 {% endmacro %}
 
 {% macro create_posts_list(posts, filter_category=None, filter_tag=None) %}
+{% set prefix = "blog/" %}
 <ul class="list-group">
 {% for post in posts %}
 	{% if (not filter_category or filter_category == post.category) and (not filter_tag or filter_tag in post.tags) %}
-		<li class="list-group-item post_info">
-			<span>
-				{% if post.pinned is sameas true %}
-					<span class="badge badge-primary pinned_badge"><i class="fa fa-thumb-tack"></i></span>
-				{% endif %}
-				<a class="listing_post_title" href="{{ url_for('.posts') }}/{{ post.path }}">{{ post.title }}</a>
-			</span>
-			{{ create_post_subtitle(post, true) }}
-		</li>
+	<li class="list-group-item post_info">
+		<span>
+			{% if post.pinned is sameas true %}
+				<span class="badge badge-primary pinned_badge"><i class="fa fa-thumb-tack"></i></span>
+			{% endif %}
+			<a class="listing_post_title" href="{{ url_for('.posts') }}/{{ post.path[prefix|length:] }}">{{ post.title }}</a>
+		</span>
+		{{ create_post_subtitle(post, prefix, true) }}
+	</li>
 	{% endif %}
 {% endfor %}
 </ul>

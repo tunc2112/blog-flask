@@ -2,20 +2,12 @@ import os
 import sys
 import traceback
 
-from flask import *
-from flask_flatpages import *
 from pygments.formatters.html import HtmlFormatter
 from werkzeug.exceptions import HTTPException
 
 from main import *
 from style import CustomMonokaiStyle
-
-PREFIX = "blog/"
-blog_bp = Blueprint(
-	'blog', __name__,
-	template_folder='./templates',
-	static_folder='./static'
-)
+from . import *
 
 
 @blog_bp.route('/pygments.css')
@@ -27,18 +19,18 @@ def pygments_css():
 @blog_bp.errorhandler(Exception)
 def handle_exception(e):
 	if isinstance(e, HTTPException):
-		return render_template("404.html"), e.code
+		return render_template("blog/404.html"), e.code
 
 
 @blog_bp.route("/projects")
 def projects():
 	from projects import projects
-	return render_template("projects.html", description="All projects", projects=projects)
+	return render_template("blog/projects.html", description="All projects", projects=projects)
 
 
 @blog_bp.route("/about")
 def about():
-	return render_template("about.html")
+	return render_template("blog/about.html")
 
 
 @blog_bp.route("/")
@@ -49,21 +41,22 @@ def index():
 	app.logger.debug("flatpages = %s", [p.path for p in flatpages])
 	try:
 		_posts = get_all_posts(PREFIX)
-		return render_template("index.html", posts=_posts)
+		return render_template("blog/index.html", posts=_posts)
 	except Exception:
 		traceback.print_exc()
 
 
 @blog_bp.route("/posts/<postname>")
 def show_post(postname):
+	app.logger.debug(PREFIX + postname)
 	post = flatpages.get_or_404(PREFIX + postname)
-	return render_template("post.html", post=post)
+	return render_template("blog/post.html", post=post)
 
 
 @blog_bp.route("/posts")
 def posts():
 	_posts = get_all_posts(PREFIX)
-	return render_template("posts.html", posts=_posts)
+	return render_template("blog/posts.html", posts=_posts)
 
 
 @blog_bp.route("/categories")
@@ -73,13 +66,13 @@ def categories():
 		category = p["category"]
 		_categories[category] = _categories.get(category, 0) + 1
 
-	return render_template("listing.html", metadata_type="categories", metadata_listing=sorted(_categories.items()))
+	return render_template("blog/listing.html", metadata_type="categories", metadata_listing=sorted(_categories.items()))
 
 
 @blog_bp.route("/categories/<name>")
 def show_posts_with_category(name):
 	_posts = get_all_posts(PREFIX)
-	return render_template("posts.html", posts=_posts, filter_category=name)
+	return render_template("blog/posts.html", posts=_posts, filter_category=name)
 
 
 @blog_bp.route("/tags")
@@ -89,13 +82,13 @@ def tags():
 		for tag in p["tags"]:
 			_tags[tag] = _tags.get(tag, 0) + 1
 
-	return render_template("listing.html", metadata_type="tags", metadata_listing=sorted(_tags.items()))
+	return render_template("blog/listing.html", metadata_type="tags", metadata_listing=sorted(_tags.items()))
 
 
 @blog_bp.route("/tags/<name>")
 def show_posts_with_tag(name):
 	_posts = get_all_posts(PREFIX)
-	return render_template("posts.html", posts=_posts, filter_tag=name)
+	return render_template("blog/posts.html", posts=_posts, filter_tag=name)
 
 
 @blog_bp.route("/search", methods=["GET", "POST"])
@@ -113,4 +106,4 @@ def search():
 				results.append(post)
 
 		results.sort(key=lambda item: (not item["pinned"], item["date"]))
-		return render_template("results.html", query=query, results=results)
+		return render_template("blog/results.html", query=query, results=results)
