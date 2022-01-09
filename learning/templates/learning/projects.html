@@ -1,4 +1,4 @@
-{% extends "core.html" %}
+{% extends "learning/core.html" %}
 
 {% set title = "Projects" %}
 {% block head_extension %}
@@ -16,7 +16,7 @@
 				<h6 class="card-subtitle mb-2 text-muted">{{ project.description }}</h6>
 				<p class="card-text">{{ project.content }}</p>
 				<a href="#" class="card-link">Home page</a>
-				<a href="https://github.com/tunc2112/{{ project.name }}" class="card-link">GitHub link</a>
+				<a href="https://github.com/{{ site_github }}/{{ project.name }}" class="card-link">GitHub link</a>
 			</div>
 		</div>
 	{% endfor %}

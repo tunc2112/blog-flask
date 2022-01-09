@@ -3,3 +3,5 @@ baseurl: /  # default: /
 blog_baseurl: /blog
 learning_baseurl: /learning
 learning_title: watashi learning
+github: tunc2112
+disqus: tunc2112

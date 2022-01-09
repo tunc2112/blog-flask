@@ -1,6 +1,7 @@
 import os
 import sys
 import traceback
+from collections import Counter
 
 from pygments.formatters.html import HtmlFormatter
 from werkzeug.exceptions import HTTPException
@@ -49,7 +50,6 @@ def index():
 @learning_bp.route("/posts/<postname>")
 def show_post(postname):
 	try:
-		app.logger.debug(PREFIX + postname)
 		post = flatpages.get_or_404(PREFIX + postname)
 		return render_template("learning/post.html", post=post)
 	except Exception:
@@ -64,12 +64,11 @@ def posts():
 
 @learning_bp.route("/categories")
 def categories():
-	_categories = {}
-	for p in flatpages:
-		category = p["category"]
-		_categories[category] = _categories.get(category, 0) + 1
-
-	return render_template("learning/listing.html", metadata_type="categories", metadata_listing=sorted(_categories.items()))
+	_posts = get_all_posts(PREFIX)
+	categories_counter = Counter(p["category"] for p in _posts)
+	return render_template(
+		"learning/listing.html", metadata_type="categories", metadata_listing=sorted(categories_counter.items())
+	)
 
 
 @learning_bp.route("/categories/<name>")
@@ -80,12 +79,11 @@ def show_posts_with_category(name):
 
 @learning_bp.route("/tags")
 def tags():
-	_tags = {}
-	for p in flatpages:
-		for tag in p["tags"]:
-			_tags[tag] = _tags.get(tag, 0) + 1
-
-	return render_template("learning/listing.html", metadata_type="tags", metadata_listing=sorted(_tags.items()))
+	_posts = get_all_posts(PREFIX)
+	tags_counter = Counter(tag for p in _posts for tag in p["tags"])
+	return render_template(
+		"learning/listing.html", metadata_type="tags", metadata_listing=sorted(tags_counter.items())
+	)
 
 
 @learning_bp.route("/tags/<name>")
@@ -102,7 +100,8 @@ def search():
 	if request.method == "GET":
 		query = request.args.get("s")
 		results = []
-		for post in list(flatpages):
+		_posts = get_all_posts(PREFIX)
+		for post in _posts:
 			# TODO: Elastic search
 			if post["category"].find(query) != -1 or any(tag.find(query) != -1 for tag in post["tags"]) \
 					or post["title"].find(query) != -1:

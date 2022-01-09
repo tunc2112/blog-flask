@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title>{{ title }} - {{ site_title }}</title>
 		<link rel="icon" href="{{ url_for('.static', filename='image/favicon.ico') }}" type="image/x-icon">
-		<script id="dsq-count-scr" src="//tunc2112.disqus.com/count.js" async></script>
+		<script id="dsq-count-scr" src="//{{ site_disqus }}.disqus.com/count.js" async></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
@@ -58,12 +58,8 @@
 		</div>
 		<footer class="footer">
 			<div class="container">
-				<p>
-					Copyright © 2020. Make with <i class="fa fa-heart"></i> by <a href="https://github.com/tunc2112">@tunc2112</a>.
-				</p>
-				{# <div>
-					<a href="https://github.com/tunc2112"><i class="fa fa-github fa-3x"></i></a>
-				</div> #}
+				<p>Copyright © 2020. Make with <i class="fa fa-heart"></i> by <a href="https://github.com/{{ site_github }}">@{{ site_github }}</a>.</p>
+				{# <div><a href="https://github.com/{{ site_github }}"><i class="fa fa-github fa-3x"></i></a></div> #}
 			</div>
 		</footer>
 		<script>convert_emoji();</script>

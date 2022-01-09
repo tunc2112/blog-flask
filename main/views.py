@@ -1,14 +1,12 @@
 import os
+import traceback
 
 from flask import *
 from flask_flatpages import *
-# from flask_frozen import Freezer
-# from flaskext.markdown import Markdown
 from pygments.formatters.html import HtmlFormatter
 from werkzeug.exceptions import HTTPException
 
 from . import app, flatpages
-from config import *
 from style import CustomMonokaiStyle
 flatpages.init_app(app)
 app.config["FLATPAGES_ROOT"] = os.path.join(app.root_path, "posts")
@@ -35,15 +33,36 @@ def pygments_css():
 @app.errorhandler(Exception)
 def handle_exception(e):
 	if isinstance(e, HTTPException):
-		return render_template("404.html"), e.code
+		return render_template("main/404.html"), e.code
 
 
 @app.route("/")
 def index():
-	app.logger.debug("prefix = %s", g.url_prefix)
-	return render_template('index.html')
+	try:
+		return render_template("main/index.html")
+	except Exception:
+		traceback.print_exc()
 	# _posts = sorted(
 	# 	[p for p in flatpages if p.path.startswith("")],
 	# 	key=lambda item: (not item["pinned"], item["date"])
 	# )
 	# return render_template("index.html", posts=_posts)
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+	# from forms import SearchForm
+	# search_form = SearchForm()
+
+	if request.method == "GET":
+		query = request.args.get("s")
+		results = []
+		_posts = list(flatpages)
+		for post in _posts:
+			# TODO: Elastic search
+			if post["category"].find(query) != -1 or any(tag.find(query) != -1 for tag in post["tags"])\
+				or post["title"].find(query) != -1:
+				results.append(post)
+
+		results.sort(key=lambda item: (not item["pinned"], item["date"]))
+		return render_template("blog/results.html", query=query, results=results)

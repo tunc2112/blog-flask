@@ -1,4 +1,4 @@
-{% extends "core.html" %}
+{% extends "learning/core.html" %}
 
 {#
 	listing.html is a merged version of categories.html and tags.html
@@ -18,7 +18,7 @@
 		<div class="badge_listing_col">
 			{% set badge_color_style = "btn-" + ("success" if metadata_type == "categories" else "secondary") %}
 
-			<a class="btn {{ badge_color_style }} tag_badge" href="{{ url_for(metadata_type) }}/{{ name }}" role="button">
+			<a class="btn {{ badge_color_style }} tag_badge" href="{{ url_for("."+metadata_type) }}/{{ name }}" role="button">
 				{% if metadata_type == "categories" %}
 					<i class="fa fa-code-fork"></i> 
 				{% endif %}
