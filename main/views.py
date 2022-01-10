@@ -1,13 +1,12 @@
 import os
 import traceback
 
-from flask import *
-from flask_flatpages import *
 from pygments.formatters.html import HtmlFormatter
 from werkzeug.exceptions import HTTPException
 
-from . import app, flatpages
+from . import *
 from style import CustomMonokaiStyle
+
 flatpages.init_app(app)
 app.config["FLATPAGES_ROOT"] = os.path.join(app.root_path, "posts")
 flatpages.reload()
@@ -49,6 +48,20 @@ def index():
 	# return render_template("index.html", posts=_posts)
 
 
+@app.route("/projects")
+def projects():
+	from projects import projects
+	try:
+		return render_template("main/projects.html", description="All projects", projects=projects)
+	except Exception:
+		traceback.print_exc()
+
+
+@app.route("/about")
+def about():
+	return render_template("main/about.html")
+
+
 @app.route("/search", methods=["GET", "POST"])
 def search():
 	# from forms import SearchForm
@@ -64,5 +77,4 @@ def search():
 				or post["title"].find(query) != -1:
 				results.append(post)
 
-		results.sort(key=lambda item: (not item["pinned"], item["date"]))
 		return render_template("blog/results.html", query=query, results=results)

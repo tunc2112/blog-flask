@@ -63,3 +63,16 @@ body > .container {
     width: 1.25em;
     height: 1.25em;
 }
+
+header {
+    margin-top: 15px;
+}
+
+#avatar {
+    background-image: url('/static/resources/avatar.png');
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: top center;
+    border-radius: 50%;
+}

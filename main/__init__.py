@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import *
 from flask_flatpages import *
 
@@ -20,7 +22,7 @@ def get_all_posts(prefix=""):
 def set_global_variable():
 	r = {"site_" + k: v for k, v in SiteConfiguration.site_variables.items()}
 	# print(SiteConfiguration.get_site_variables(), r)
-	return dict(**r, site=SiteConfiguration.site_variables)
+	return dict(**r, site=SiteConfiguration.site_variables, site_now=datetime.now())
 
 
 # app.logger.debug("url_map = %s", app.url_map)

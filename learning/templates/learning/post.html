@@ -2,7 +2,7 @@
 
 {% set title = post.title %}
 {% block head_extension %}
-	<link rel="stylesheet" href="{{ url_for('.pygments_css') }}">
+	<link rel="stylesheet" href="{{ url_for('pygments_css') }}">
 	<link rel="stylesheet" href="{{ url_for('.static', filename='css/codehilite.css') }}">
 	<link rel="stylesheet" href="{{ url_for('.static', filename='css/post.css') }}">
 	<script type="text/javascript" src="{{ url_for('.static', filename='js/post.js') }}"></script>

@@ -7,31 +7,13 @@ from pygments.formatters.html import HtmlFormatter
 from werkzeug.exceptions import HTTPException
 
 from main import *
-from style import CustomMonokaiStyle
 from . import *
-
-
-@blog_bp.route('/pygments.css')
-def pygments_css():
-	style = HtmlFormatter(style=CustomMonokaiStyle).style
-	return pygments_style_defs(style), 200, {'Content-Type': 'text/css'}
 
 
 @blog_bp.errorhandler(Exception)
 def handle_exception(e):
 	if isinstance(e, HTTPException):
-		return render_template("blog/404.html"), e.code
-
-
-@blog_bp.route("/projects")
-def projects():
-	from projects import projects
-	return render_template("blog/projects.html", description="All projects", projects=projects)
-
-
-@blog_bp.route("/about")
-def about():
-	return render_template("blog/about.html")
+		return render_template("main/404.html"), e.code
 
 
 @blog_bp.route("/")
@@ -104,5 +86,4 @@ def search():
 				or post["title"].find(query) != -1:
 				results.append(post)
 
-		results.sort(key=lambda item: (not item["pinned"], item["date"]))
 		return render_template("blog/results.html", query=query, results=results)
